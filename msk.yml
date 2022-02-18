@@ -1,0 +1,16 @@
+AWSTemplateFormatVersion: 2010-09-09
+
+Description: MSK Cluster with required properties.
+Resources:
+  TestCluster:
+    Type: 'AWS::MSK::Cluster'
+    Properties:
+      ClusterName: ClusterWithRequiredProperties
+      KafkaVersion: 2.6.2
+      NumberOfBrokerNodes: 3
+      BrokerNodeGroupInfo:
+        InstanceType: kafka.m5.large
+        ClientSubnets:
+          - subnet-03a07a66 
+          - subnet-b9c19aff 
+          - subnet-ffdc2288 
