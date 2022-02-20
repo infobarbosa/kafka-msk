@@ -1,4 +1,5 @@
 AWSTemplateFormatVersion: 2010-09-09
+Description: Cria uma instancia spot EC2 com o binario do Kafka para acesso ao MSK.
 
 Parameters:
   KeyName:
@@ -30,21 +31,7 @@ Mappings:
       HVM64: ami-090006f29ecb2d79a
       HVMG2: NOT_SUPPORTED
 
-
-Description: MSK Cluster with required properties.
 Resources:
-  KafkaCluster:
-    Type: 'AWS::MSK::Cluster'
-    Properties:
-      ClusterName: ClusterWithRequiredProperties
-      KafkaVersion: 2.6.2
-      NumberOfBrokerNodes: 3
-      BrokerNodeGroupInfo:
-        InstanceType: kafka.m5.large
-        ClientSubnets:
-          - subnet-03a07a66 
-          - subnet-b9c19aff 
-          - subnet-ffdc2288 
   EC2Instance:
     Type: AWS::EC2::Instance
     Properties:
@@ -53,6 +40,9 @@ Resources:
         InstanceType: !Ref InstanceType
         SecurityGroups:
         - !Ref Ec2SecurityGroup
+        InstanceMarketOptions:
+          MarketType: spot
+
         BlockDeviceMappings:
         -
           DeviceName: /dev/sda1
