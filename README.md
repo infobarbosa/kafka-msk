@@ -4,6 +4,28 @@
     - Docker
     - Docker Compose
 
+# Alguns comandos
+Criando o stack
+```
+aws cloudformation create-stack --stack-name myec2v1 --parameters ParameterKey=KeyPairName,ParameterValue=developer  --template-body file://ec2.yml
+```
+
+Descrevendo o stack
+```
+aws cloudformation describe-stack-events --stack-name myec2v1
+```
+
+Deletando o stack
+```
+aws cloudformation delete-stack --stack-name myec2v1
+
+```
+
+Verificando o conteúdo de UserData da instância EC2
+```
+aws ec2 describe-instance-attribute --instance-id i-1234567890abcdef0 --attribute userData
+```
+
 # Build do projeto
 Na pasta raiz do projeto:
 ```
